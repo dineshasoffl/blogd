@@ -20,14 +20,20 @@ app.use(express.urlencoded({extended:true}));//Enables form data parsing
 /*app.use(express.static("public"));*/
 /*app.use("/uploads",express.static("uploads"));*/
 
+app.set("trust proxy",1);
+
 const session=require("express-session");
+const MongoStore=require("connect-mongo");
 
 app.use(session({
-    secret:"03102002",
+    secret:process.env.SESSION_SECRET||"03102002",
     resave:false,
     saveUninitialized:false,
+    store:MongoStore.create({
+        mongoUrl:process.env.MONGO_URI,
+    }),
     cookie:{
-    secure:true,
+    secure:false,
     httpOnly:true,
     sameSite:"none"
 }

@@ -24,15 +24,15 @@ app.use(express.urlencoded({extended:true}));//Enables form data parsing
 app.set("trust proxy",1);
 
 const session=require("express-session");
-const MongoStore=require("connect-mongo");
+/*const MongoStore=require("connect-mongo");*/
 
 app.use(session({
     secret:process.env.SESSION_SECRET||"03102002",
     resave:false,
     saveUninitialized:false,
-    store:MongoStore.create({
+    /*store:MongoStore.create({
         mongoUrl:process.env.MONGO_URI,
-    }),
+    }),*/
     cookie:{
     secure:true,
     httpOnly:true,

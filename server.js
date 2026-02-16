@@ -3,6 +3,7 @@ const app=express();
 const { log, error } = require("console");
 const multer=require("multer");
 const path=require("path");
+require("dotenv").config();
 
 const cors=require("cors");
 
@@ -27,9 +28,9 @@ app.use(session({
 
 const mongoose=require("mongoose");
 
-mongoose.connect("mongodb://127.0.0.1:27017/blogDB")
+mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("Connected to MongoDB"))
-.catch(error=>console.error("MongoDB connection error:",err));
+.catch(error=>console.error("MongoDB connection error:",error));
 
 //Set up storage config for multer
 const storage=multer.diskStorage({
@@ -430,7 +431,7 @@ app.get("/check-session", (req, res) => {
 });
 
 //Start the server
-const PORT=3000;
+const PORT=process.env.PORT||3000;
 app.listen(PORT,()=>{
     console.log(`Server is running on http://localhost:${PORT}`);
 });

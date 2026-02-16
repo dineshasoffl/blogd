@@ -26,7 +26,11 @@ app.use(session({
     secret:"03102002",
     resave:false,
     saveUninitialized:false,
-    cookie:{secure:false}
+    cookie:{
+    secure:true,
+    httpOnly:true,
+    sameSite:"none"
+}
 }))
 
 const mongoose=require("mongoose");

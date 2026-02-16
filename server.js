@@ -9,8 +9,9 @@ const cors=require("cors");
 
 app.use(cors({
     origin:[
-        "http://localhost:5173",
-        "https://blogd-two.vercel.app"
+        "https://blogd-two.vercel.app",
+        "http://localhost:5173"
+       
     ],           
     credentials:true
 }));
@@ -33,7 +34,7 @@ app.use(session({
         mongoUrl:process.env.MONGO_URI,
     }),
     cookie:{
-    secure:false,
+    secure:true,
     httpOnly:true,
     sameSite:"none"
 }

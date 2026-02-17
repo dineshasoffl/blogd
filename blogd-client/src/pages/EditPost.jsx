@@ -92,7 +92,7 @@ function EditPost(){
                             <label className="form-label">Current Image</label>
                             <div className="mb-2">
                             <img
-                            src={post.image}
+                            src={existingImage}
                             alt="Current Post Image"
                             className="img-fluid rounded"
                             style={{maxHeight:"200px",objectFit:"cover"}}

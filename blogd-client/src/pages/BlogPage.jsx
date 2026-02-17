@@ -71,20 +71,6 @@ function BlogPage(){
             }
       }
 
-    function getImageUrl(image){
-        if(!image) return null;
-
-        const BASE="https://blogd-backend.onrender.com"
-
-        //already has /uploads
-        if(image.startsWith("/uploads")){
-            return `${BASE}${image}`;
-        }
-
-        //old format
-        return `${BASE}/uploads/${image}`
-    }
-
     useEffect(()=>{
         async function fetchPost(){
             try{
@@ -125,7 +111,7 @@ function BlogPage(){
             {post.image && (
                 <div className="mb-4">
                 <img
-                src={getImageUrl(post.image)}
+                src={post.image}
                 alt="Post Image"
                 className="img-fluid rounded"
                 style={{width:"100%",maxHeight:"400px",objectFit:"cover"}}

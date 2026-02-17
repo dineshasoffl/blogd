@@ -15,20 +15,6 @@ function EditPost(){
     const [removeImage,setRemoveImage]=useState(false);
     const [loading,setLoading]=useState(true);
 
-     function getImageUrl(image){
-        if(!image) return null;
-
-        const BASE="https://blogd-backend.onrender.com"
-
-        //already has /uploads
-        if(image.startsWith("/uploads")){
-            return `${BASE}${image}`;
-        }
-
-        //old format
-        return `${BASE}/uploads/${image}`
-    }
-
     useEffect(()=>{
         async function fetchPost(){
             try{
@@ -106,7 +92,7 @@ function EditPost(){
                             <label className="form-label">Current Image</label>
                             <div className="mb-2">
                             <img
-                            src={getImageUrl(existingImage)}
+                            src={post.image}
                             alt="Current Post Image"
                             className="img-fluid rounded"
                             style={{maxHeight:"200px",objectFit:"cover"}}

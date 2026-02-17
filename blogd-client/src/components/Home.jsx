@@ -27,20 +27,6 @@ function Home(){
         }
     }
 
-    function getImageUrl(image){
-        if(!image) return null;
-
-        const BASE="https://blogd-backend.onrender.com"
-
-        //already has /uploads
-        if(image.startsWith("/uploads")){
-            return `${BASE}${image}`;
-        }
-
-        //old format
-        return `${BASE}/uploads/${image}`
-    }
-
     useEffect(()=>{
         async function fetchPosts(){
             try{
@@ -81,7 +67,7 @@ function Home(){
 
                          {post.image && (
                         <img 
-                        src={getImageUrl(post.image)}
+                        src={post.image}
                         className="card-img-top"
                         alt="Post Image"
                         style={{height:"200px",objectFit:"cover"}}

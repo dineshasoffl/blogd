@@ -1,7 +1,6 @@
 const express=require("express");
 const app=express();
 const { log, error } = require("console");
-const multer=require("multer");
 const path=require("path");
 require("dotenv").config();
 
@@ -24,15 +23,11 @@ app.use("/uploads",express.static("uploads"));
 app.set("trust proxy",1);
 
 const session=require("express-session");
-/*const MongoStore=require("connect-mongo");*/
 
 app.use(session({
     secret:process.env.SESSION_SECRET||"03102002",
     resave:false,
     saveUninitialized:false,
-    /*store:MongoStore.create({
-        mongoUrl:process.env.MONGO_URI,
-    }),*/
     cookie:{
     secure:true,
     httpOnly:true,
@@ -47,16 +42,25 @@ mongoose.connect(process.env.MONGO_URI)
 .catch(error=>console.error("MongoDB connection error:",error));
 
 //Set up storage config for multer
-const storage=multer.diskStorage({
-    destination:function(req,file,cb){
-        cb(null,"uploads/");//directory to store images
-    },
-    filename:function(req,file,cb){
-        cb(null,Date.now()+path.extname(file.originalname));//unique file name
-    }
+const cloudinary=require("cloudinary").v2;
+const {CloudinaryStorage}=require("multer-storage-cloudinary");
+const multer=require("multer");
+
+cloudinary.config({
+    cloud_name:process.env.CLOUDINARY_CLOUD_NAME,
+    api_key:process.env.CLOUDINARY_API_KEY,
+    api_secret:process.env.CLOUDINARY_API_SECRET,
 });
 
-const upload=multer({storage:storage});
+const storage=new CloudinaryStorage({
+    cloudinary:cloudinary,
+    params:{
+        folder:"blogd_posts",
+        allowed_formats:["jpg","png","jpeg","webp"]
+    },
+});
+
+const upload=multer({storage});
 
 const User=require("./models/user");//Import User model
 
@@ -186,7 +190,7 @@ app.post("/add",requireAuth,upload.single("image"),async(req,res)=>{
         if(!title||!content){
             return res.status(400).json({message:"Title and content are required"});
         }
-        const image=req.file?req.file.filename:null;
+        const image=req.file?req.file.path:null;
 
         const newPost=new Post({
             title,

@@ -180,6 +180,7 @@ const Post=require("./models/post");//Import Post model
 
 //Add route
 app.post("/add",requireAuth,upload.single("image"),async(req,res)=>{
+    console.log("FILE OBJECT:",req.file);
     if(!req.session.user){
         return res.status(401).json({message:"Unauthorized.Please log in."});
     }

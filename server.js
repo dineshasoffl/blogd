@@ -268,7 +268,7 @@ app.put("/posts/:id",requireAuth,upload.single("image"),async(req,res)=>{
         }
 
         if(req.file){
-            post.image="/uploads/"+req.file.filename;
+            post.image=req.file.path;
         }
         
         await post.save();

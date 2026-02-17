@@ -3,6 +3,7 @@ import {useAuth} from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useNotification } from "../context/NotificationContext";
 import api from "../services/api"
+import { useEffect } from "react";
 
 function NewPost(){
     const {user}= useAuth();
@@ -12,6 +13,13 @@ function NewPost(){
     const [title,setTitle]=useState("");
     const [content,setContent]=useState("");
     const [image,setImage]=useState(null);
+    const [preview,setPreview]=useState(null);
+
+    useEffect(()=>{
+        return ()=>{
+            if (preview) URL.revokeObjectURL(preview);
+        };
+    },[preview]);
 
     if(!user){
         return <p>Please login to create a post.</p>;
@@ -67,9 +75,30 @@ function NewPost(){
                     type="file"
                     className="form-control"
                     accept="image/*"
-                    onChange={(e)=>setImage(e.target.files[0])}
+                    onChange={(e)=>{
+                        const file=e.target.files[0];
+                        setImage(file);
+
+                        if(file){
+                            setPreview(URL.createObjectURL(file));
+                        }
+                    }}
                     />
                     </div>
+
+                    {preview &&(
+                        <div className="mb-3">
+                            <label className="form-label">Image Preview:</label>
+                            <div className="mb-2">
+                            <img
+                            src={preview}
+                            alt="Preview"
+                            className="img-fluid rounded"
+                            style={{maxHeight:"200px",objectFit:"cover"}}
+                            />
+                            </div>
+                        </div>
+                    )}
 
                     <div className="mb-3">
                         <label className="form-label">Content</label><br/>

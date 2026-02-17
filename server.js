@@ -18,7 +18,6 @@ app.use(cors({
 app.use(express.json());//Enables parsing of JSON data from requests
 app.use(express.urlencoded({extended:true}));//Enables form data parsing
 /*app.use(express.static("public"));*/
-app.use("/uploads",express.static("uploads"));
 
 app.set("trust proxy",1);
 
@@ -180,7 +179,6 @@ const Post=require("./models/post");//Import Post model
 
 //Add route
 app.post("/add",requireAuth,upload.single("image"),async(req,res)=>{
-    console.log("FILE OBJECT:",req.file);
     if(!req.session.user){
         return res.status(401).json({message:"Unauthorized.Please log in."});
     }

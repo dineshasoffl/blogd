@@ -27,16 +27,18 @@ function Home(){
         }
     }
 
-     function getImageUrl(image){
+    function getImageUrl(image){
         if(!image) return null;
+
+        const BASE="https://blogd-backend.onrender.com"
 
         //already has /uploads
         if(image.startsWith("/uploads")){
-            return `http://localhost:3000${image}`;
+            return `${BASE}${image}`;
         }
 
         //old format
-        return `http://localhost:3000/uploads/${image}`
+        return `${BASE}/uploads/${image}`
     }
 
     useEffect(()=>{

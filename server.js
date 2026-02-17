@@ -19,7 +19,7 @@ app.use(cors({
 app.use(express.json());//Enables parsing of JSON data from requests
 app.use(express.urlencoded({extended:true}));//Enables form data parsing
 /*app.use(express.static("public"));*/
-/*app.use("/uploads",express.static("uploads"));*/
+app.use("/uploads",express.static("uploads"));
 
 app.set("trust proxy",1);
 

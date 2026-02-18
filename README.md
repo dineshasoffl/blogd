@@ -6,31 +6,29 @@ This project started as a simple blog and evolved into a complete full stack app
 
 ## Features
 
--User authentication (Register / Login / Logout)
+- User authentication (Register / Login / Logout)
 
--Create,edit, and delete blog posts
+- Create,edit, and delete blog posts
 
--My posts dashboard
+- My posts dashboard
 
--Image upload with Cloudinary
+- Image upload with Cloudinary
 
--Like and comment system
+- Like and comment system
 
--Dark Mode
+- Dark Mode
 
 ## Tech Stack
 
 ### Frontend
 
--React
-
--Bootstrap
+- React
+- Bootstrap
 
 ### Backend
 
--Node.js
-
--Express.js
+- Node.js
+- Express.js
 
 ### Deployment
 
@@ -70,25 +68,21 @@ npm run dev
 
 Create a `.env` file in the backend root:
 
-MONGO_URI=your_mongodb_connection_string
-
-SESSION_SECRET=your_secret
-
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-
-CLOUDINARY_API_KEY=your_api_key
-
-CLOUDINARY_API_SECRET=your_api_secret
+MONGO_URI=your_mongodb_connection_string␣␣  
+SESSION_SECRET=your_secret␣␣  
+CLOUDINARY_CLOUD_NAME=your_cloud_name␣␣    
+CLOUDINARY_API_KEY=your_api_key␣␣  
+CLOUDINARY_API_SECRET=your_api_secret␣␣  
 
 ## Future Improvements
 
--User profiles
+- User profiles
 
--Search functionality
+- Search functionality
 
--Notifications
+- Notifications
 
--Rich text editor
+- Rich text editor
 
 
 ## Deployment Links
@@ -140,5 +134,3 @@ Backend(Render):https://blogd-backend.onrender.com
 ### Dark Mode
 
 ![Dark Mode](./screenshots/Dark%20mode.png)
-
-
